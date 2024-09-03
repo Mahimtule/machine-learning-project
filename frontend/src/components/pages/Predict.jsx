@@ -1,20 +1,43 @@
 import Input from "../Input";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
+import { Link } from "react-router-dom";
+
 const Predict = () => {
+  const data = ["Hours_Studied", "Marks_Obtained"];
+
   return (
-    <main className="flex flex-col p-10 pt-20 gap-8">
-      <div className="flex justify-start items-center gap-5">
-        <h1 className="text-3xl font-medium">Machine Learning Project</h1>
-        <Dropdown />
-        <Dropdown />
+    <main className="p-10 bg-gray-100 w-full h-screen flex flex-col gap-4">
+      <div className="p-5 bg-white flex flex-col justify-start items-center gap-5 rounded-lg border shadow lg:flex-row">
+        <Link className="text-2xl font-medium" to="/">
+          Machine Learning Project
+        </Link>
+        <div className="w-full flex flex-col justify-center items-center gap-2 md:flex-row lg:w-fit">
+          <Dropdown
+            options={[
+              "linear_regression",
+              "logistic_regression",
+              "descicion_tree",
+              "knn",
+              "naive_bayes",
+            ]}
+          />
+          {data && <Dropdown options={data.reverse()} />}
+        </div>
       </div>
-      <div className="flex flex-col w-full justify-center items-start border border-gray-500 rounded-xl p-6 gap-4">
-        <h1 className="text-xl font-medium">Model Trained Successfully</h1>
-        <h1 className="text-xl font-sm text-gray-500">accuracy: 0.98746</h1>
+      <div className="w-full p-6 bg-white flex flex-col justify-center items-start gap-4 border rounded-lg shadow">
+        <h1 className="text-xl text-green-500 font-medium">
+          Model Trained Successfully : 200
+        </h1>
         <hr className="w-full" />
-        <Input />
-        <Button>make prediction</Button>
+        <form className="w-full flex flex-col justify-center items-start gap-4">
+          <label className="text-xl font-medium">Make Predictions</label>
+          <Input
+            type="text"
+            placeholder="enter some data to make predictions"
+          />
+          <Button type="submit">make prediction</Button>
+        </form>
       </div>
     </main>
   );
